@@ -52,12 +52,25 @@ abstract public class BasePage extends CucumberHelper {
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-
     public void waitMillis(long millis) {
         try {
             TimeUnit.MILLISECONDS.sleep(millis);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }
+    }
+
+    public void scrollThePage() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+        for (int i = 0; i < 10; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            Thread.sleep(100);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            js.executeScript("window.scrollBy(0, -200)");
+            Thread.sleep(100);
         }
     }
 }

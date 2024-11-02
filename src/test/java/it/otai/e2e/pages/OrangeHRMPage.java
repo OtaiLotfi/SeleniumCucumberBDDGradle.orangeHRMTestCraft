@@ -161,10 +161,13 @@ public class OrangeHRMPage extends BasePage {
     }
 
     public void scrollToTheLabel(String copyRightLabel) {
+        this.waitMillis(SHORT_WAIT);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        By copyRightXpath = By.xpath("//*/div[3]//p[text()='" + copyRightLabel + "']");
+        By copyRightXpath = By.xpath("//*[text()='" + copyRightLabel + "']");
         WebElement copyRightXpathField = getDriver().findElement(copyRightXpath);
         js.executeScript("arguments[0].scrollIntoView(true);", copyRightXpathField);
+        js.executeScript("window.scrollBy(0, -120)");
+        this.waitMillis(SHORT_WAIT);
     }
 
     public void scrollScrollToTheBottomOfThePage() {
