@@ -37,14 +37,6 @@ public class OrangeHRMPage extends BasePage {
         inputCheckbox.click();
     }
 
-    public void clickOn(String buttonLabel) {
-        this.waitMillis(SHORT_WAIT + SHORT_WAIT);
-        By buttonXpath = By.xpath("//*/button[text()='" + buttonLabel + "']");
-        this.waitVisibilityOfElement(buttonXpath, ELEMENT_VISIBILITY_DELAY);
-        WebElement buttonField = getDriver().findElement(buttonXpath);
-        buttonField.click();
-    }
-
     public int countRows(By parentRowGroupXpath) {
         WebElement parentRowGroupElement = getDriver().findElement(parentRowGroupXpath);
         List<WebElement> childElements = parentRowGroupElement.findElements(By.xpath("./*"));

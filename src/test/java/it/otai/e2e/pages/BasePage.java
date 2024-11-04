@@ -24,9 +24,8 @@ abstract public class BasePage extends CucumberHelper {
 
     public boolean isElementPresent(By locator) {
         try {
-            this.waitVisibilityOfElement(locator, ELEMENT_VISIBILITY_DELAY);
-            getDriver().findElement(locator);
-            return true;
+            this.waitMillis(TIMEOUT);
+            return !getDriver().findElements(locator).isEmpty();
         } catch (NoSuchElementException e) {
             return false;
         }

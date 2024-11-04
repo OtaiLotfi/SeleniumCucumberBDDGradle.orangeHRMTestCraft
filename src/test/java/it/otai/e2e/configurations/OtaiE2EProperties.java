@@ -12,6 +12,11 @@ import org.springframework.context.annotation.Configuration;
 public class OtaiE2EProperties {
   private Boolean debug;
   private String orangeHRMUrl;
+  private String phoneNumber;
+  private String emailAddress;
+  private String gitHubUrl;
+  private String linkedinUrl;
+
   private E2EUsersProperties users;
 
   public boolean isDebug() {
