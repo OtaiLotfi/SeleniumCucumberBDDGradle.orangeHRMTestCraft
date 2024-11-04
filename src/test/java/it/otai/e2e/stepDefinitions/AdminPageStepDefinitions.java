@@ -45,7 +45,7 @@ public class AdminPageStepDefinitions {
     }
 
     @Then("I scroll to the top of the page")
-    public void iScrollToTheTopOfThePage() throws InterruptedException {
+    public void iScrollToTheTopOfThePage() {
         adminPage.scrollToTheTopOfThePage();
     }
 }

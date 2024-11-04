@@ -41,6 +41,12 @@ abstract public class BasePage extends CucumberHelper {
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
+
+    public void waitForElementCountToDecrease(By locator, int initialCount, long timeoutInSeconds) {
+        new WebDriverWait(getDriver(), Duration.ofSeconds(timeoutInSeconds))
+                .until(ExpectedConditions.numberOfElementsToBeLessThan(locator, initialCount));
+    }
+
     public void waitVisibilityOfElement(By locator, long timeoutInSeconds) {
         new WebDriverWait(getDriver(), Duration.ofSeconds(timeoutInSeconds))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -63,13 +69,26 @@ abstract public class BasePage extends CucumberHelper {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
 
         for (int i = 0; i < 10; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            Thread.sleep(100);
+            js.executeScript("window.scrollBy(0, 100)");
+            Thread.sleep(500);
         }
 
         for (int i = 0; i < 10; i++) {
-            js.executeScript("window.scrollBy(0, -200)");
-            Thread.sleep(100);
+            js.executeScript("window.scrollBy(0, -100)");
+            Thread.sleep(500);
         }
+    }
+
+    public void clickOn(String buttonLabel) {
+        this.waitMillis(SHORT_WAIT + SHORT_WAIT);
+        By buttonXpath = By.xpath("//*/button[text()='" + buttonLabel + "']");
+        this.waitVisibilityOfElement(buttonXpath, ELEMENT_VISIBILITY_DELAY);
+        WebElement buttonField = getDriver().findElement(buttonXpath);
+        buttonField.click();
+    }
+
+    public void scrollToTheTopOfThePage() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollTo(0, 0)");
     }
 }
