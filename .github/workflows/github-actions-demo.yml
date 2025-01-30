@@ -8,11 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4  # Updated to latest version
 
       - name: Run Super-Linter
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5  # Use latest version for better support
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_EXCLUDE: ".*build.gradle$"
+          FILTER_REGEX_EXCLUDE: ".*build.gradle$"  # Ignore build.gradle
+          VALIDATE_ALL_CODEBASE: true  # Validate all files in the repository
+          VALIDATE_JAVA: true  # Enable Java linting
+          VALIDATE_GHERKIN: true  # Enable Gherkin linting
+          JAVAC_DEFAULT_VERSION: 17  # Set Java version (update as needed)
