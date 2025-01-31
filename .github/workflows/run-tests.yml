@@ -24,18 +24,6 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          # Add the repository for libgconf-2-4 if needed
-          sudo add-apt-repository ppa:gnome3-team/gnome3
-          sudo apt-get update
-          sudo apt-get install -y xvfb libxi6 libgconf-2-4
-
-      - name: Set up Xvfb (Virtual Display for Headless UI interactions)
-        run: |
-          nohup Xvfb :99 -ac & export DISPLAY=:99
-
       - name: Install Gradle (for wrapper generation)
         run: |
           curl -sSL https://get.sdkman.io | bash
