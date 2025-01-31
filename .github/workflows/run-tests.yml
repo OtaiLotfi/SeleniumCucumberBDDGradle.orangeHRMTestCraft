@@ -24,6 +24,15 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
+      - name: Install Gradle (for wrapper generation)
+        run: |
+          curl -sSL https://get.sdkman.io | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install gradle
+
+      - name: Generate Gradle Wrapper
+        run: gradle wrapper
+
       - name: Grant execute permission for Gradle
         run: chmod +x gradlew
 
