@@ -16,7 +16,6 @@ version '1.0.0'
 
 sonar {
   properties {
-
   }
 }
 
@@ -25,10 +24,9 @@ configurations {
     extendsFrom testImplementation
   }
 }
+
 def tags = (findProperty('tags') == null) ? 'not @Ignore' : findProperty('tags') + ' and not @Ignore'
 def threads = (findProperty('threads') == null) ? 4 : findProperty('threads')
-
-
 
 task cucumber() {
   dependsOn build
@@ -40,13 +38,14 @@ task cucumber() {
       args = ['--plugin', 'pretty',
               '--plugin', 'html:build/reports/e2eTests.html',
               '--plugin', 'json:build/reports/e2eTests.json',
+              '--plugin', 'usage', // Log usage of steps
               '--glue', 'it.otai.e2e', 'src/test/java/it/otai/e2e',
               '--tags', "@advanced-vertical-and-horizontal-scroll-bar-operations",
+              '--threads', "${threads}"
       ]
     }
   }
 }
-
 
 task cucumberLocal() {
   dependsOn build
@@ -58,9 +57,10 @@ task cucumberLocal() {
       args = ['--plugin', 'pretty',
               '--plugin', 'html:build/reports/e2eTests.html',
               '--plugin', 'json:build/reports/e2eTests.json',
+              '--plugin', 'usage', // Log usage of steps
               '--glue', 'it.otai.e2e', 'src/test/java/it/otai/e2e',
               '--tags', "@advanced-vertical-and-horizontal-scroll-bar-operations",
-              '--threads',"${threads}",
+              '--threads', "${threads}"
       ]
     }
   }
@@ -68,11 +68,8 @@ task cucumberLocal() {
 
 repositories {
   mavenLocal()
-
   mavenCentral()
 }
-
-
 
 java {
   registerFeature("optional") {
@@ -109,21 +106,15 @@ dependencies {
   testImplementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
   testImplementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.3.1'
 
-
   optionalImplementation 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   testAnnotationProcessor 'org.projectlombok:lombok'
 
-
   testImplementation('org.springframework.boot:spring-boot-starter-web') {
     exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-core'
     exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
   }
-
-
-
-
 }
 
 bootJar {
