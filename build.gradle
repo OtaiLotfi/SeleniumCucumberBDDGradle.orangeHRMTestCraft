@@ -1,4 +1,4 @@
-plugins {
+plugins { 
   id 'java'
   id 'idea'
   id 'org.springframework.boot' version '3.2.1'
@@ -40,7 +40,7 @@ task cucumber() {
               '--plugin', 'json:build/reports/e2eTests.json',
               '--plugin', 'usage', // Log usage of steps
               '--glue', 'it.otai.e2e', 'src/test/java/it/otai/e2e',
-              '--tags', "@advanced-vertical-and-horizontal-scroll-bar-operations",
+              '--tags', "@Employee-Distribution-by-Sub-Unit-and-Location and @advanced-vertical-and-horizontal-scroll-bar-operations",
               '--threads', "${threads}"
       ]
     }
@@ -59,7 +59,7 @@ task cucumberLocal() {
               '--plugin', 'json:build/reports/e2eTests.json',
               '--plugin', 'usage', // Log usage of steps
               '--glue', 'it.otai.e2e', 'src/test/java/it/otai/e2e',
-              '--tags', "@advanced-vertical-and-horizontal-scroll-bar-operations",
+              '--tags', "@Employee-Distribution-by-Sub-Unit-and-Location and @advanced-vertical-and-horizontal-scroll-bar-operations",
               '--threads', "${threads}"
       ]
     }
