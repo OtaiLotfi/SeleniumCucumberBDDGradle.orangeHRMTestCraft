@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Super-Linter
+      - name: Run Run-Actions
         uses: github/super-linter@v5
         env:
           DEFAULT_BRANCH: main
