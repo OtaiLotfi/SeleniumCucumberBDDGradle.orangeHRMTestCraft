@@ -1,4 +1,5 @@
 name: Run Automated Tests
+
 on:
   push:
     branches:
@@ -35,34 +36,35 @@ jobs:
       - name: Grant execute permission for Gradle
         run: chmod +x gradlew
 
-      - name: Ensure Test Report Directory Exists
-        run: mkdir -p build/reports/tests/test/
-
       - name: Run Tests with Gradle
         run: ./gradlew clean test
 
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4  
         with:
-          name: test-results
+          name: test-reports
           path: build/reports/tests/test/
-
-  reports:
+  
+  test-report:
     name: Generate Test Report
     runs-on: ubuntu-latest
     needs: test  
+
     steps:
-      - name: Download Test Results
-        uses: actions/download-artifact@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Test Reports
+        uses: actions/download-artifact@v4
         with:
-          name: test-results
+          name: test-reports
           path: test-reports
 
-      - name: Ensure Test Report Directory Exists
-        run: mkdir -p test-reports
+      - name: Display Test Report Files
+        run: ls -R test-reports
 
-      - name: Upload Test Report as an Artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Test Reports as Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: test-report
+          name: final-test-reports
           path: test-reports
